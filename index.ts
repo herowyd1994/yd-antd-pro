@@ -1,7 +1,6 @@
 /** @format */
 
 export * from './useAntdFetch';
-export { default as useNavigation } from './useNavigation';
 export { default as useTable } from './useTable';
 export { default as useTableSelection } from './useTableSelection';
 export { default as useForm } from './useForm';

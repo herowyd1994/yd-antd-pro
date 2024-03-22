@@ -3,19 +3,17 @@
 import { Props, Store, Params } from './types';
 import { useRef } from 'react';
 import { useLatest, useStore } from '@yd/r-hooks';
-import { useNavigation, useFetch } from '../index';
+import { useFetch } from '../index';
 import { ProFormInstance } from '@ant-design/pro-components';
 import { message } from 'antd';
 
 export default <P extends Record<string, any>>({
     submitUrl,
     updateUrl,
-    back = true,
     formatParams = (params) => params,
     done
 }: Props<P>) => {
     const fetch = useFetch();
-    const { back: b } = useNavigation();
     const { status, ctx, dispatch } = useStore<Store>({
         status: 'ADD',
         ctx: {}
@@ -28,7 +26,6 @@ export default <P extends Record<string, any>>({
         );
         await done?.();
         message.success('保存成功');
-        back && b();
         return res;
     });
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {

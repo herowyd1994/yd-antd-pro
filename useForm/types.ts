@@ -4,7 +4,6 @@ import { Props as TableProps } from '../useTable/types';
 
 export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
     submitUrl?: string;
-    back?: boolean;
     formatParams?(params: Params<P>): Params<P>;
     done?(): any;
 }

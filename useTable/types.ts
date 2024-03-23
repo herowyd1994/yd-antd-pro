@@ -10,7 +10,7 @@ export interface Props<D = any> {
     updateUrl?: string;
     refs?: MutableRefObject<any> | MutableRefObject<any>[];
     formatParams?(params: Params): Params;
-    formatData?(data: any): D;
+    formatData?(data: any): D[];
 }
 export interface Params extends Record<string, any> {
     current: number;

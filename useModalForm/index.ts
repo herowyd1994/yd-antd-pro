@@ -12,7 +12,7 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         onSave,
         onAdd: add,
         onEdit: edit
-    } = useForm({ ...props, back: false });
+    } = useForm(props);
     const tableRef = useRef<ActionType>();
     const { visible, dispatch } = useStore<Store>({ visible: false });
     const onVisibleChange = (visible: boolean) => dispatch({ visible });
@@ -21,11 +21,11 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         await tableRef.current?.reloadAndRest?.();
         onVisibleChange(false);
     };
-    const onAdd = async (params?: Record<string, any>) => {
+    const onAdd = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);
         await add(params);
     };
-    const onEdit = async (params?: Record<string, any>, ctx: Record<string, any> = {}) => {
+    const onEdit = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);
         await edit(params, ctx);
     };

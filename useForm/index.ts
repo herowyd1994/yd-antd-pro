@@ -32,8 +32,8 @@ export default <P extends Record<string, any>>({
         status && (await dispatch({ status }));
         onFinish({ ...params, ...(await formRef.current?.validateFields()) });
     };
-    const onAdd = async (params: Record<string, any> = {}) => {
-        await dispatch({ status: 'ADD', ctx: {} });
+    const onAdd = async (params: Record<string, any> = {}, ctx: Record<string, any> = {}) => {
+        await dispatch({ status: 'ADD', ctx });
         formRef.current?.setFieldsValue(params);
     };
     const onEdit = async (params: Record<string, any> = {}, ctx: Record<string, any> = {}) => {

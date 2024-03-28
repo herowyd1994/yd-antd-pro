@@ -37,7 +37,6 @@ export default <D = any>(
         if (time - t <= interval) {
             return d;
         }
-        reset();
         const data = formatData(await getData(key));
         dispatch({ data, key });
         Reflect.set(cache[key], 'data', data);
@@ -45,11 +44,11 @@ export default <D = any>(
         done?.(data);
         return data;
     }, 0);
-    const { done: getData } = useLock(async (k: string = key) => {
-        if (!Reflect.has(cache, k)) {
+    const { done: getData } = useLock(async (key: string) => {
+        if (!Reflect.has(cache, key)) {
             return;
         }
-        const { url, params, config } = Reflect.get(cache, k);
+        const { url, params, config } = Reflect.get(cache, key);
         const data = await get(url, formatParams(params), config);
         return defaultValue && typeof defaultValue === 'object' ?
                 Object.assign(defaultValue!, data)
@@ -59,6 +58,9 @@ export default <D = any>(
     return {
         cache,
         data,
+        key,
+        dispatch,
+        reset,
         onRequest,
         getData
     };

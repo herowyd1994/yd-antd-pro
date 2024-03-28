@@ -23,7 +23,7 @@ export default <D = any>(
     }: Config<D> = {}
 ) => {
     const { get } = useFetch();
-    const { data, key, dispatch } = useStore<Store<D>>({
+    const { data, key, dispatch, reset } = useStore<Store<D>>({
         data: void 0,
         key: ''
     });
@@ -37,6 +37,7 @@ export default <D = any>(
         if (time - t <= interval) {
             return d;
         }
+        reset();
         const data = formatData(await getData(key));
         dispatch({ data, key });
         Reflect.set(cache[key], 'data', data);
@@ -50,9 +51,9 @@ export default <D = any>(
         }
         const { url, params, config } = Reflect.get(cache, k);
         const data = await get(url, formatParams(params), config);
-        return defaultValue && typeof defaultValue === 'object'
-            ? Object.assign(defaultValue!, data)
-            : data;
+        return defaultValue && typeof defaultValue === 'object' ?
+                Object.assign(defaultValue!, data)
+            :   data;
     }, delay);
     useUpdate(onRequest, deps, Number(!immediate));
     return {

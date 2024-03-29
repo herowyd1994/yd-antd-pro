@@ -30,17 +30,16 @@ export default <D = any>(
     const { done: onRequest } = useLock(async (p?: Record<string, any>) => {
         params = { ...params, ...p };
         const key = `${url}${transformUrlParams(params)}`;
-        const time = Date.now();
+        const now = Date.now();
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
-        const { data: d, time: t } = Reflect.get(cache, key);
-        if (time - t <= interval) {
-            return d;
+        let { data, time } = Reflect.get(cache, key);
+        if (now - time > interval) {
+            data = formatData(await getData(key));
+            Reflect.set(cache[key], 'data', data);
+            Reflect.set(cache[key], 'time', now);
         }
-        const data = formatData(await getData(key));
         dispatch({ data, key });
-        Reflect.set(cache[key], 'data', data);
-        Reflect.set(cache[key], 'time', time);
         done?.(data);
         return data;
     }, 0);

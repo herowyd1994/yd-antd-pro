@@ -32,12 +32,12 @@ export default <P extends Record<string, any>>({
         status && (await dispatch({ status }));
         return onFinish({ ...params, ...(await formRef.current?.validateFields()) });
     };
-    const onFieldAdd = async (params: Record<string, any> = {}, ctx: Record<string, any> = {}) => {
-        await dispatch({ status: 'ADD', ctx });
-        formRef.current?.setFieldsValue(params);
-    };
-    const onFieldEdit = async (params: Record<string, any> = {}, ctx: Record<string, any> = {}) => {
-        await dispatch({ status: 'EDIT', ctx });
+    const onFieldsValue = async (
+        status: Store['status'],
+        params: Record<string, any> = {},
+        ctx: Store['ctx'] = {}
+    ) => {
+        await dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
     return {
@@ -48,7 +48,6 @@ export default <P extends Record<string, any>>({
             labelCol: { span: 3 }
         },
         onSave,
-        onFieldAdd,
-        onFieldEdit
+        onFieldsValue
     };
 };

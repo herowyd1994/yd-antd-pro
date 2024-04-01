@@ -5,13 +5,13 @@ import { useStore, useUpdate } from '@yd/r-hooks';
 import { useForm } from '../index';
 import { useRef } from 'react';
 import { ActionType } from '@ant-design/pro-components';
+import { Store as FormStore } from '../useForm/types';
 
 export default <P extends Record<string, any>>({ title, ...props }: Props<P>) => {
     const {
         formOpts: { formRef, onFinish: finish, ...opts },
         onSave,
-        onFieldAdd,
-        onFieldEdit
+        onFieldsValue
     } = useForm(props);
     const tableRef = useRef<ActionType>();
     const { visible, dispatch } = useStore<Store>({ visible: false });
@@ -21,13 +21,13 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         await tableRef.current?.reloadAndRest?.();
         onVisibleChange(false);
     };
-    const onAdd = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
+    const onShow = async (
+        status: FormStore['status'],
+        params?: Record<string, any>,
+        ctx?: FormStore['ctx']
+    ) => {
         onVisibleChange(true);
-        onFieldAdd(params, ctx);
-    };
-    const onEdit = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
-        onVisibleChange(true);
-        onFieldEdit(params, ctx);
+        onFieldsValue(status, params, ctx);
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
@@ -41,7 +41,6 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         },
         tableRef,
         onSave,
-        onAdd,
-        onEdit
+        onShow
     };
 };

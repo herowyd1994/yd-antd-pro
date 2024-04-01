@@ -9,6 +9,7 @@ export interface Config<D = any> extends Partial<RequestConfig> {
     interval?: number;
     delay?: number;
     deps?: DependencyList;
+    reset?: boolean;
     formatParams?(params: Record<string, any>): Record<string, any>;
     formatData?(data: any): D;
     done?(data: D): any;

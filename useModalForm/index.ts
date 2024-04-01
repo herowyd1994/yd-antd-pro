@@ -10,8 +10,8 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
     const {
         formOpts: { formRef, onFinish: finish, ...opts },
         onSave,
-        onAdd: add,
-        onEdit: edit
+        onFieldAdd,
+        onFieldEdit
     } = useForm(props);
     const tableRef = useRef<ActionType>();
     const { visible, dispatch } = useStore<Store>({ visible: false });
@@ -23,11 +23,11 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
     };
     const onAdd = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);
-        await add(params, ctx);
+        onFieldAdd(params, ctx);
     };
     const onEdit = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);
-        await edit(params, ctx);
+        onFieldEdit(params, ctx);
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {

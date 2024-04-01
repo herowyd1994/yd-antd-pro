@@ -23,7 +23,7 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
     };
     const onAdd = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);
-        await add(params);
+        await add(params, ctx);
     };
     const onEdit = async (params?: Record<string, any>, ctx?: Record<string, any>) => {
         onVisibleChange(true);

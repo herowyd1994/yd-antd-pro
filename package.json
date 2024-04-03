@@ -8,14 +8,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://gitee.com/herowyd1994/yd-antd-pro.git"
+        "url": "git@github.com:herowyd1994/yd-antd-pro.git"
     },
     "author": "~Wyd丶",
     "license": "ISC",
     "dependencies": {
-        "@yd/fetch": "https://gitee.com/herowyd1994/yd-fetch.git",
-        "@yd/r-hooks": "https://gitee.com/herowyd1994/yd-r-hooks.git",
-        "@yd/utils": "https://gitee.com/herowyd1994/yd-utils.git"
+        "@yd/fetch": "https://github.com/herowyd1994/yd-fetch.git",
+        "@yd/r-hooks": "https://github.com/herowyd1994/yd-r-hooks.git",
+        "@yd/utils": "https://github.com/herowyd1994/yd-utils.git"
     },
     "devDependencies": {
         "@ant-design/pro-components": "^2.6.52",

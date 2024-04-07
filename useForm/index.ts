@@ -8,6 +8,8 @@ import { ProFormInstance } from '@ant-design/pro-components';
 import { message } from 'antd';
 
 export default <P extends Record<string, any>>({
+    layout = 'horizontal',
+    labelCol = { span: 3 },
     submitUrl,
     updateUrl,
     formatParams = (params) => params,
@@ -44,8 +46,8 @@ export default <P extends Record<string, any>>({
         formOpts: {
             formRef,
             onFinish,
-            layout: 'horizontal',
-            labelCol: { span: 3 }
+            layout,
+            labelCol
         },
         onSave,
         onFieldsValue

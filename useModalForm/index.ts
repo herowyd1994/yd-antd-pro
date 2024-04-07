@@ -21,13 +21,13 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         await tableRef.current?.reloadAndRest?.();
         onVisibleChange(false);
     };
-    const onShow = async (
-        status: FormStore['status'],
-        params?: Record<string, any>,
-        ctx?: FormStore['ctx']
-    ) => {
+    const onAddShow = async (params?: Record<string, any>, ctx?: FormStore['ctx']) => {
         onVisibleChange(true);
-        onFieldsValue(status, params, ctx);
+        onFieldsValue(params, ctx, 'ADD');
+    };
+    const onEditShow = async (params?: Record<string, any>, ctx?: FormStore['ctx']) => {
+        onVisibleChange(true);
+        onFieldsValue(params, ctx, 'EDIT');
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
@@ -41,6 +41,7 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
         },
         tableRef,
         onSave,
-        onShow
+        onAddShow,
+        onEditShow
     };
 };

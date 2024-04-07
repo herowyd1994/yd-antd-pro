@@ -33,9 +33,9 @@ export default <P extends Record<string, any>>({
         return onFinish({ ...params, ...(await formRef.current?.validateFields()) });
     };
     const onFieldsValue = async (
-        status: Store['status'],
         params: Record<string, any> = {},
-        ctx: Store['ctx'] = {}
+        ctx: Store['ctx'] = {},
+        status: Store['status'] = 'EDIT'
     ) => {
         await dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);

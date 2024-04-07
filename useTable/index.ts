@@ -9,8 +9,8 @@ import { message, ModalFuncProps } from 'antd';
 
 export default <D extends Record<string, any>>({
     columns,
-    search = { defaultCollapsed: false, labelWidth: 'auto' },
-    pagination = { showSizeChanger: true, showQuickJumper: true, defaultPageSize: 10 },
+    pageSize: defaultPageSize = 10,
+    width: x,
     requestUrl,
     removeUrl,
     updateUrl,
@@ -70,8 +70,9 @@ export default <D extends Record<string, any>>({
             actionRef,
             columns,
             request,
-            search,
-            pagination
+            search: { defaultCollapsed: false, labelWidth: 'auto' },
+            pagination: { showSizeChanger: true, showQuickJumper: true, defaultPageSize },
+            scroll: { x }
         },
         params,
         data,

@@ -9,7 +9,7 @@ import { message } from 'antd';
 
 export default <P extends Record<string, any>>({
     layout = 'horizontal',
-    labelCol = { span: 3 },
+    span = 3,
     submitUrl,
     updateUrl,
     formatParams = (params) => params,
@@ -47,7 +47,7 @@ export default <P extends Record<string, any>>({
             formRef,
             onFinish,
             layout,
-            labelCol
+            labelCol: { span }
         },
         onSave,
         onFieldsValue

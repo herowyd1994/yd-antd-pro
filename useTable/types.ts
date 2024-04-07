@@ -1,14 +1,12 @@
 /** @format */
 
 import { ProColumns } from '@ant-design/pro-components';
-import { SearchConfig } from '@ant-design/pro-table/lib/components/Form/FormRender';
 import { MutableRefObject } from 'react';
-import { TablePaginationConfig } from 'antd';
 
 export interface Props<D = any> {
     columns: ProColumns[];
-    search?: false | SearchConfig;
-    pagination?: false | TablePaginationConfig;
+    pageSize?: number;
+    width?: number;
     requestUrl: string;
     removeUrl?: string;
     updateUrl?: string;

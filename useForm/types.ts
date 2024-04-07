@@ -6,7 +6,7 @@ import { ColProps } from 'antd';
 
 export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
     layout?: FormLayout;
-    labelCol?: ColProps;
+    span?: number;
     submitUrl?: string;
     formatParams?(params: Params<P>): Params<P>;
     done?(): any;

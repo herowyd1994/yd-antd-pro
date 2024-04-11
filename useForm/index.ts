@@ -1,6 +1,6 @@
 /** @format */
 
-import { Props, Store, Params } from './types';
+import { Props, Store } from './types';
 import { useRef } from 'react';
 import { useLatest, useStore } from '@yd/r-hooks';
 import { useFetch } from '../index';
@@ -21,7 +21,7 @@ export default <P extends Record<string, any>>({
         ctx: {}
     });
     const formRef = useRef<ProFormInstance>();
-    const onFinish = useLatest(async (params: Params<P>) => {
+    const onFinish = useLatest(async (params: P) => {
         const res = await fetch[status === 'ADD' ? 'post' : 'put'](
             status === 'ADD' ? submitUrl! : updateUrl!,
             formatParams({ ...params, ...ctx })

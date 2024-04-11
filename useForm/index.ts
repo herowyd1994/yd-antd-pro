@@ -26,13 +26,13 @@ export default <P extends Record<string, any>>({
             status === 'ADD' ? submitUrl! : updateUrl!,
             formatParams({ ...params, ...ctx })
         );
-        await done?.();
+        done?.(res);
         message.success('保存成功');
         return res;
     });
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {
         status && (await dispatch({ status }));
-        return onFinish({ ...params, ...(await formRef.current?.validateFields()) });
+        return onFinish({ ...(await formRef.current?.validateFields()), ...params });
     };
     const onFieldsValue = async (
         params: Record<string, any> = {},

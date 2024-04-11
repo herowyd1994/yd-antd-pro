@@ -38,7 +38,7 @@ export default <D extends Record<string, any>>({
     };
     const onRemove = async (
         params: Record<string, any>,
-        content: ReactNode = '',
+        content?: ReactNode,
         title: ReactNode = '确认删除',
         options?: ModalFuncProps
     ) => {
@@ -49,7 +49,7 @@ export default <D extends Record<string, any>>({
     };
     const onUpdate = async (
         params: Record<string, any>,
-        content: ReactNode = '',
+        content?: ReactNode,
         title: ReactNode = '确认更新',
         options?: ModalFuncProps
     ) => {

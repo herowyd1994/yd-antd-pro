@@ -27,7 +27,7 @@ export default <P extends Record<string, any>>({
             formatParams({ ...params, ...ctx })
         );
         done?.(res);
-        message.success('保存成功');
+        message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
     });
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {

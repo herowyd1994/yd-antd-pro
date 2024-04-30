@@ -10,8 +10,8 @@ export interface Config<D = any, P = {}> extends Partial<RequestConfig> {
     delay?: number;
     deps?: DependencyList;
     reset?: boolean;
-    formatParams?(params: Params<P>): Params<P>;
-    formatData?(data: any): D;
+    formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;
+    formatData?(data: any): Promise<D> | D;
     done?(data: D): any;
 }
 type Params<P = any> = Record<string, any> & P;

@@ -7,7 +7,7 @@ export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
     layout?: FormLayout;
     span?: number;
     submitUrl?: string;
-    formatParams?(params: Params<P>): Params<P>;
+    formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;
     done?(data: any): void;
 }
 type Params<P> = Record<string, any> & P;

@@ -37,7 +37,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         r && (await reset());
         let { data, time } = Reflect.get(cache, key);
         if (now - time > interval) {
-            data = formatData(await d2(key));
+            data = await formatData(await d2(key));
             Reflect.set(cache[key], 'data', data);
             Reflect.set(cache[key], 'time', now);
         }
@@ -50,7 +50,7 @@ export default <D = any, P extends Record<string, any> = {}>(
             return;
         }
         const { url, params, config } = Reflect.get(cache, key);
-        const data = await get(url, formatParams(params), config);
+        const data = await get(url, await formatParams(params), config);
         return defaultValue && typeof defaultValue === 'object' ?
                 Object.assign(defaultValue!, data)
             :   data;

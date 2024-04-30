@@ -24,7 +24,7 @@ export default <P extends Record<string, any>>({
     const onFinish = useLatest(async (params: P) => {
         const res = await fetch[status === 'ADD' ? 'post' : 'put'](
             status === 'ADD' ? submitUrl! : updateUrl!,
-            formatParams({ ...params, ...ctx })
+            await formatParams({ ...params, ...ctx })
         );
         done?.(res);
         message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);

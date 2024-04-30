@@ -11,8 +11,8 @@ export interface Props<D = any> {
     removeUrl?: string;
     updateUrl?: string;
     refs?: MutableRefObject<any> | MutableRefObject<any>[];
-    formatParams?(params: Params): Params;
-    formatData?(data: any): D[];
+    formatParams?(params: Params): Promise<Params> | Params;
+    formatData?(data: any): Promise<D[]> | D[];
 }
 export interface Params extends Record<string, any> {
     current: number;

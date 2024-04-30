@@ -27,12 +27,12 @@ export default <D extends Record<string, any>>({
     });
     const actionRef = useRef<ActionType>();
     const request = async (params: Params) => {
-        params = formatParams(params);
+        params = await formatParams(params);
         params = { ...params, pageNum: params.current };
         let { list: data, total } = await get(requestUrl!, params)
             .then((list) => (Array.isArray(list) ? { list, total: list.length } : list))
             .catch(() => ({ list: [], total: 0 }));
-        data = formatData(data);
+        data = await formatData(data);
         dispatch({ params, data, total });
         return { data, success: true, total };
     };

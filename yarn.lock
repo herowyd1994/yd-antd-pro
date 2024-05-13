@@ -393,7 +393,7 @@
 
 "@yd/r-hooks@https://github.com/herowyd1994/yd-r-hooks.git":
   version "1.0.0"
-  resolved "https://github.com/herowyd1994/yd-r-hooks.git#e50f6c105598786101d9635c2bf1af39d8a91d2e"
+  resolved "https://github.com/herowyd1994/yd-r-hooks.git#1dc8cd44d84c47cbcbd25cd448220280cd1cd040"
   dependencies:
     "@yd/utils" "https://github.com/herowyd1994/yd-utils.git"
 

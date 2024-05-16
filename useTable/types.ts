@@ -10,7 +10,7 @@ export interface Props<D = any> {
     requestUrl: string;
     removeUrl?: string;
     updateUrl?: string;
-    refs?: MutableRefObject<ActionType>[];
+    refs?: MutableRefObject<any>[];
     formatParams?(params: Params): Promise<Params> | Params;
     formatData?(data: any): Promise<D[]> | D[];
 }

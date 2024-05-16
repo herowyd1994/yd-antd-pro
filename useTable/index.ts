@@ -64,7 +64,7 @@ export default <D extends Record<string, any>>({
             actionRef,
             columns,
             request,
-            search: { defaultCollapsed: false, labelWidth: 'auto' },
+            search: { defaultCollapsed: false, labelWidth: 'auto' as 'auto' },
             pagination: { showSizeChanger: true, showQuickJumper: true, defaultPageSize },
             scroll: { x }
         },

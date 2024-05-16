@@ -58,15 +58,9 @@ export default <D extends Record<string, any>>({
         await actionRef.current?.reloadAndRest?.();
         message.success('更新成功');
     };
-    useUpdate(() => {
-        if (!refs) {
-            return;
-        }
-        refs = Array.isArray(refs) ? refs : [refs];
-        refs.forEach((ref) => (ref.current = actionRef.current));
-    }, [actionRef.current]);
+    useUpdate(() => refs?.forEach((ref) => (ref.current = actionRef.current)), [actionRef.current]);
     return {
-        tableOpts: {
+        tableProps: {
             actionRef,
             columns,
             request,

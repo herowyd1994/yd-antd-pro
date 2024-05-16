@@ -9,7 +9,7 @@ import { Store as FormStore } from '../useForm/types';
 
 export default <P extends Record<string, any>>({ title, ...props }: Props<P>) => {
     const {
-        formOpts: { formRef, onFinish: finish, ...opts },
+        formProps: { formRef, onFinish: finish, ...p },
         onSave,
         onFieldsValue
     } = useForm(props);
@@ -31,8 +31,8 @@ export default <P extends Record<string, any>>({ title, ...props }: Props<P>) =>
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
-        modalFormOpts: {
-            ...opts,
+        modalFormProps: {
+            ...p,
             formRef,
             visible,
             title,

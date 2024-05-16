@@ -43,7 +43,7 @@ export default <P extends Record<string, any>>({
         formRef.current?.setFieldsValue(params);
     };
     return {
-        formOpts: {
+        formProps: {
             formRef,
             onFinish,
             layout,

@@ -1,6 +1,6 @@
 /** @format */
 
-import { ProColumns } from '@ant-design/pro-components';
+import { ActionType, ProColumns } from '@ant-design/pro-components';
 import { MutableRefObject } from 'react';
 
 export interface Props<D = any> {
@@ -10,7 +10,7 @@ export interface Props<D = any> {
     requestUrl: string;
     removeUrl?: string;
     updateUrl?: string;
-    refs?: MutableRefObject<any> | MutableRefObject<any>[];
+    refs?: MutableRefObject<ActionType>[];
     formatParams?(params: Params): Promise<Params> | Params;
     formatData?(data: any): Promise<D[]> | D[];
 }

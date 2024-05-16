@@ -25,7 +25,7 @@ export default ({
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });
     return {
-        selectionOpts: {
+        tableSelectionProps: {
             rowKey,
             rowSelection: {
                 type,

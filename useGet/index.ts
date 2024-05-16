@@ -30,7 +30,7 @@ export default <D = any, P extends Record<string, any> = {}>(
     });
     const { done: d1 } = useLock(async (p) => {
         params = { ...params, ...p };
-        const key = `${url}${transformUrlParams(params)}`;
+        const key = `${url}${transformUrlParams(params!)}`;
         const now = Date.now();
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });

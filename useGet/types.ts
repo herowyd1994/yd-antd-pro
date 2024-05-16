@@ -15,8 +15,8 @@ export interface Config<D = any, P = {}> extends Partial<RequestConfig> {
     done?(data: D): any;
 }
 type Params<P = any> = Record<string, any> & P;
-export type Request<D> = (params?: Record<string, any>) => Promise<D>;
-export type GetData = <D>(string: string) => Promise<D>;
+export type Request<D> = (params?: Record<string, any>) => Promise<Promise<D>>;
+export type GetData = <D>(string: string) => Promise<Promise<D>>;
 export interface Store<D> {
     data: D | undefined;
     key: string;

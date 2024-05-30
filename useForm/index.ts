@@ -3,7 +3,8 @@
 import { Props, Store } from './types';
 import { useRef } from 'react';
 import { useLatest, useStore } from '@yd/r-hooks';
-import { useFetch } from '../index';
+import { useFetch, useGet } from '../index';
+import { isNone } from '@yd/utils';
 import { ProFormInstance } from '@ant-design/pro-components';
 import { message } from 'antd';
 
@@ -12,6 +13,7 @@ export default <P extends Record<string, any>>({
     span = 3,
     submitUrl,
     updateUrl,
+    requestProps: { url, params, status: s, formatData = (data) => data, ...props },
     formatParams = (params) => params,
     done
 }: Props<P>) => {
@@ -42,6 +44,11 @@ export default <P extends Record<string, any>>({
         await dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
+    useGet(url, params, {
+        immediate: !isNone(params),
+        done: async (data) => onFieldsValue(await formatData(data), params, s),
+        ...props
+    });
     return {
         formProps: {
             formRef,

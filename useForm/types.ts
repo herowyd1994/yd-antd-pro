@@ -1,12 +1,19 @@
 /** @format */
 
 import { Props as TableProps } from '../useTable/types';
+import { Config } from '../useGet/types';
 import { FormLayout } from 'antd/es/form/Form';
 
 export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
     layout?: FormLayout;
     span?: number | string;
     submitUrl?: string;
+    requestProps?: {
+        url: string;
+        params?: Record<string, any>;
+        status?: Store['status'];
+        formatData?<D>(data: any): D;
+    } & Config;
     formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;
     done?(data: any): void;
 }

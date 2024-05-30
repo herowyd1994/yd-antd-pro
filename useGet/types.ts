@@ -12,7 +12,7 @@ export interface Config<D = any, P = {}> extends Partial<RequestConfig> {
     reset?: boolean;
     formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;
     formatData?(data: any): Promise<D> | D;
-    done?(data: D): any;
+    done?(data: D): void;
 }
 type Params<P = any> = Record<string, any> & P;
 export type Request<D> = (params?: Record<string, any>) => Promise<Promise<D>>;

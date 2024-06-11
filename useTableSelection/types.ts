@@ -3,10 +3,16 @@
 export interface Props {
     rowKey?: string;
     type?: 'checkbox' | 'radio';
-    defaultKeys?: Value;
+    defaultKeys?: Keys;
     onDisable?(record: Record<string, any>): boolean;
 }
 export interface Store {
-    cache: Record<number, Value>;
+    cache: Record<
+        number,
+        {
+            keys: Keys;
+            records: Record<string, any>[];
+        }
+    >;
 }
-type Value = (string | number)[];
+export type Keys = (string | number)[];

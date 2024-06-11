@@ -3,7 +3,7 @@
 export interface Props {
     rowKey?: string;
     type?: 'checkbox' | 'radio';
-    defaultValue?: Value;
+    defaultKeys?: Value;
     onDisable?(record: Record<string, any>): boolean;
 }
 export interface Store {

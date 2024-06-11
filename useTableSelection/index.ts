@@ -18,9 +18,9 @@ export default ({
         () => Object.values(cache).reduce((arr, keys) => [...arr, ...keys], []),
         [cache]
     );
-    const tableRef = useRef<ActionType>();
+    const actionRef = useRef<ActionType>();
     const onChange = (keys: (string | number)[]) => {
-        cache[type === 'radio' ? 0 : tableRef.current!.pageInfo!.current] = keys;
+        cache[type === 'radio' ? 0 : actionRef.current?.pageInfo!.current] = keys;
         dispatch({ cache: { ...cache } });
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });
@@ -35,6 +35,6 @@ export default ({
             }
         },
         rowKeys: selectedRowKeys,
-        tableRef
+        actionRef
     };
 };

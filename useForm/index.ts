@@ -13,7 +13,7 @@ export default <P extends Record<string, any>>({
     span = 3,
     submitUrl,
     updateUrl,
-    requestProps: { url, params, status: s, formatData = (data) => data, ...props },
+    requestProps: { url, params, status: s, formatData = (data) => data, ...props } = { url: '' },
     formatParams = (params) => params,
     done
 }: Props<P>) => {

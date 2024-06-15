@@ -6,7 +6,7 @@ import { sleep } from '@yd/utils';
 
 export default (props?: ModalFuncProps) => {
     const confirm = (content: ReactNode, title?: ReactNode, options?: ModalFuncProps) =>
-        new Promise<void>((resolve) =>
+        new Promise<void>(resolve =>
             Modal.confirm({
                 title,
                 content,
@@ -16,7 +16,7 @@ export default (props?: ModalFuncProps) => {
             })
         );
     const alert = (content: ReactNode, title?: ReactNode, options?: ModalFuncProps) =>
-        new Promise<void>((resolve) =>
+        new Promise<void>(resolve =>
             Modal.warning({
                 title,
                 content,

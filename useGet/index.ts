@@ -17,8 +17,8 @@ export default <D = any, P extends Record<string, any> = {}>(
         delay,
         deps = [],
         reset: r = false,
-        formatParams = (params) => params,
-        formatData = (data) => data,
+        formatParams = params => params,
+        formatData = data => data,
         done,
         ...config
     }: Config<D, P> = {}
@@ -28,7 +28,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         data: void 0,
         key: ''
     });
-    const { done: d1 } = useLock(async (p) => {
+    const { done: d1 } = useLock(async p => {
         params = { ...params, ...p };
         const key = `${url}${transformUrlParams(params!)}`;
         const now = Date.now();
@@ -45,7 +45,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         done?.(data);
         return data;
     }, 0);
-    const { done: d2 } = useLock(async (key) => {
+    const { done: d2 } = useLock(async key => {
         if (!Reflect.has(cache, key)) {
             return;
         }

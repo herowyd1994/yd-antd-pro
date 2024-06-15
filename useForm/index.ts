@@ -13,8 +13,8 @@ export default <P extends Record<string, any>>({
     span = 3,
     submitUrl,
     updateUrl,
-    requestProps: { url, params, status: s, formatData = (data) => data, ...props } = { url: '' },
-    formatParams = (params) => params,
+    requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' },
+    formatParams = params => params,
     done
 }: Props<P>) => {
     const fetch = useFetch();
@@ -46,7 +46,7 @@ export default <P extends Record<string, any>>({
     };
     useGet(url, params, {
         immediate: !isNone(params),
-        done: async (data) => onFieldsValue(await formatData(data), params, s),
+        done: async data => onFieldsValue(await formatData(data), params, s),
         ...props
     });
     return {
@@ -56,6 +56,7 @@ export default <P extends Record<string, any>>({
             layout,
             labelCol: { span }
         },
+        status,
         onSave,
         onFieldsValue
     };

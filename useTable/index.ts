@@ -15,8 +15,8 @@ export default <D extends Record<string, any>>({
     removeUrl,
     updateUrl,
     refs,
-    formatParams = (params) => params,
-    formatData = (data) => data
+    formatParams = params => params,
+    formatData = data => data
 }: Props<D>) => {
     const { get, del, put } = useFetch();
     const { confirm } = useModal();
@@ -30,7 +30,7 @@ export default <D extends Record<string, any>>({
         params = await formatParams(params);
         params = { ...params, pageNum: params.current };
         let { list: data, total } = await get(requestUrl!, params)
-            .then((list) => (Array.isArray(list) ? { list, total: list.length } : list))
+            .then(list => (Array.isArray(list) ? { list, total: list.length } : list))
             .catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
         dispatch({ params, data, total });
@@ -58,7 +58,7 @@ export default <D extends Record<string, any>>({
         await actionRef.current?.reloadAndRest?.();
         message.success('更新成功');
     };
-    useUpdate(() => refs?.forEach((ref) => (ref.current = actionRef.current)), [actionRef.current]);
+    useUpdate(() => refs?.forEach(ref => (ref.current = actionRef.current)), [actionRef.current]);
     return {
         tableProps: {
             actionRef,

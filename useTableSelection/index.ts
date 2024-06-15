@@ -1,6 +1,6 @@
 /** @format */
 
-import { Props, Store, Keys } from './types';
+import { Props, Store } from './types';
 import { useStore } from '@yd/r-hooks';
 import { useMemo, useRef } from 'react';
 import { ActionType } from '@ant-design/pro-components';
@@ -9,10 +9,11 @@ export default ({
     rowKey = 'id',
     type = 'checkbox',
     defaultKeys = [],
+    defaultRecords = [],
     onDisable = () => false
 }: Props = {}) => {
     const { cache, dispatch } = useStore<Store>({
-        cache: { 1: { keys: defaultKeys, records: [] } }
+        cache: { 1: { keys: defaultKeys, records: defaultRecords } }
     });
     const { rowKeys, rowRecords } = useMemo(
         () =>
@@ -26,7 +27,7 @@ export default ({
         [cache]
     );
     const actionRef = useRef<ActionType>();
-    const onChange = (keys: Keys, records: Record<string, any>[]) => {
+    const onChange = (keys: (string | number)[], records: Record<string, any>[]) => {
         cache[type === 'radio' ? 1 : actionRef.current?.pageInfo?.current] = { keys, records };
         dispatch({ cache: { ...cache } });
     };

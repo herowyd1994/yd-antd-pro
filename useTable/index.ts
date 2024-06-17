@@ -4,7 +4,7 @@ import { ActionType } from '@ant-design/pro-components';
 import { Props, Store, Params } from './types';
 import { ReactNode, useRef } from 'react';
 import { useStore, useUpdate } from '@yd/r-hooks';
-import { useFetch, useModal } from '../index';
+import { useFetch, useInteractive } from '../index';
 import { message, ModalFuncProps } from 'antd';
 
 export default <D extends Record<string, any>>({
@@ -19,7 +19,7 @@ export default <D extends Record<string, any>>({
     formatData = data => data
 }: Props<D>) => {
     const { get, del, put } = useFetch();
-    const { confirm } = useModal();
+    const { confirm } = useInteractive();
     const { params, data, total, dispatch } = useStore<Store<D>>({
         params: {},
         data: [],

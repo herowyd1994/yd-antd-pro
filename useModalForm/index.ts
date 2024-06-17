@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import { ActionType } from '@ant-design/pro-components';
 import { Store as FormStore } from '../useForm/types';
 
-export default <P extends Record<string, any>>({ title = '', ...props }: Props<P>) => {
+export default <P extends Record<string, any>>({ title = tip => tip, ...props }: Props<P>) => {
     const {
         formProps: { formRef, onFinish: finish, ...p },
         status,
@@ -36,7 +36,7 @@ export default <P extends Record<string, any>>({ title = '', ...props }: Props<P
             ...p,
             formRef,
             visible,
-            title: `${status === 'ADD' ? '新增' : '编辑'}${title}`,
+            title: typeof title === 'function' ? title(status === 'ADD' ? '新增' : '编辑') : title,
             onVisibleChange,
             onFinish
         },

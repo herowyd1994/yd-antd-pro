@@ -6,4 +6,4 @@ export { default as useTableSelection } from './useTableSelection';
 export { default as useForm } from './useForm';
 export { default as useModalForm } from './useModalForm';
 export { default as useGet } from './useGet';
-export { default as useModal } from './useModal';
+export { default as useInteractive } from './useInteractive';

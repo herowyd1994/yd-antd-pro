@@ -12,7 +12,7 @@ export default ({
     defaultRecords = [],
     onDisable = () => false
 }: Props = {}) => {
-    const { cache, dispatch } = useStore<Store>({
+    const { cache, dispatch, reset } = useStore<Store>({
         cache: { 1: { keys: defaultKeys, records: defaultRecords } }
     });
     const { rowKeys, rowRecords } = useMemo(
@@ -44,6 +44,7 @@ export default ({
         },
         rowKeys,
         rowRecords,
-        actionRef
+        actionRef,
+        reset
     };
 };

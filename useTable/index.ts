@@ -44,7 +44,7 @@ export default <D extends Record<string, any>>({
     ) => {
         content && (await confirm(content, title, options));
         await del(removeUrl!, params);
-        await actionRef.current?.reloadAndRest?.();
+        await actionRef.current?.reloadAndRest();
         message.success('删除成功');
     };
     const onUpdate = async (
@@ -55,7 +55,7 @@ export default <D extends Record<string, any>>({
     ) => {
         content && (await confirm(content, title, options));
         await put(updateUrl!, params);
-        await actionRef.current?.reloadAndRest?.();
+        await actionRef.current?.reloadAndRest();
         message.success('更新成功');
     };
     useUpdate(() => refs?.forEach(ref => (ref.current = actionRef.current)), [actionRef.current]);

@@ -1,6 +1,6 @@
 /** @format */
 
-import { ActionType, ProColumns } from '@ant-design/pro-components';
+import { ProColumns } from '@ant-design/pro-components';
 import { MutableRefObject } from 'react';
 
 export interface Props<D = any> {

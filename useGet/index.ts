@@ -32,8 +32,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         params = { ...params, ...p };
         const key = `${url}${transformUrlParams(params!)}`;
         const now = Date.now();
-        !Reflect.has(cache, key) &&
-            Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
+        !Reflect.has(cache, key) && Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
         r && (await reset());
         let { data, time } = Reflect.get(cache, key);
         if (now - time > interval) {
@@ -51,9 +50,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         }
         const { url, params, config } = Reflect.get(cache, key);
         const data = await get(url, await formatParams(params), config);
-        return defaultValue && typeof defaultValue === 'object' ?
-                Object.assign(defaultValue!, data)
-            :   data;
+        return defaultValue && typeof defaultValue === 'object' ? Object.assign(defaultValue!, data) : data;
     }, delay);
     useUpdate(d1, deps, Number(!immediate));
     return {

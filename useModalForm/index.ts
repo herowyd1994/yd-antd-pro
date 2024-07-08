@@ -19,7 +19,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
     const onVisibleChange = (visible: boolean) => dispatch({ visible });
     const onFinish = async (params: P) => {
         await finish(params);
-        await actionRef.current?.reloadAndRest();
+        await actionRef.current?.reloadAndRest?.();
         onVisibleChange(false);
     };
     const onShow = async (
@@ -36,10 +36,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
             ...p,
             formRef,
             visible,
-            title:
-                typeof title === 'function' ?
-                    title(status === 'ADD' ? '新增' : '编辑', status)
-                :   title,
+            title: typeof title === 'function' ? title(status === 'ADD' ? '新增' : '编辑', status) : title,
             onVisibleChange,
             onFinish
         },

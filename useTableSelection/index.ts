@@ -28,7 +28,7 @@ export default ({
     );
     const actionRef = useRef<ActionType>();
     const onChange = (keys: (string | number)[], records: Record<string, any>[]) => {
-        cache[type === 'radio' ? 1 : actionRef.current?.pageInfo.current] = { keys, records };
+        cache[type === 'radio' ? 1 : actionRef.current?.pageInfo?.current] = { keys, records };
         dispatch({ cache: { ...cache } });
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });

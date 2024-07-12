@@ -21,6 +21,7 @@
         "@ant-design/pro-components": "^2.6.52",
         "@types/react": "^18.2.67",
         "antd": "^5.15.3",
-        "prettier": "^3.2.5"
+        "prettier": "^3.2.5",
+        "xlsx": "^0.18.5"
     }
 }

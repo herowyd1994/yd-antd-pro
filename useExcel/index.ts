@@ -1,0 +1,52 @@
+/** @format */
+
+import { selectFile } from '@yd/utils';
+import { read, writeFile, utils } from 'xlsx';
+import { message } from 'antd';
+import { Props, Handler } from './types';
+import { useFetch } from '../index';
+import { useLock } from '@yd/r-hooks';
+
+export default ({
+    columns,
+    filename = '文件',
+    params,
+    requestUrl,
+    submitUrl,
+    formatParams = params => params
+}: Props) => {
+    columns = columns.filter(({ hideInTable, valueType }) => !hideInTable && valueType !== 'option');
+    const { get, post } = useFetch();
+    const { done: d1 } = useLock<void>(async p => {
+        const { 0: file } = await selectFile('single', '.xlsx,.xls');
+        const { Sheets, SheetNames } = read(await file.arrayBuffer());
+        await post(
+            submitUrl!,
+            await formatParams({
+                ...utils
+                    .sheet_to_json<Record<string, any>[]>(Sheets[SheetNames[0]])
+                    .map(item =>
+                        columns.reduce(
+                            (obj, { title, dataIndex }) => ({ ...obj, [dataIndex as string]: item[title as string] }),
+                            {}
+                        )
+                    ),
+                ...params,
+                ...p
+            })
+        );
+        message.success('导入成功');
+    });
+    const { done: d2 } = useLock<void>(async p => {
+        const { list } = await get(requestUrl, await formatParams({ ...params, ...p }));
+        const res = list.map(item => columns.map(({ dataIndex }) => item[dataIndex as string]));
+        const wb = utils.book_new();
+        utils.book_append_sheet(wb, utils.aoa_to_sheet([columns.map(({ title }) => title), ...res]), 'Sheet1');
+        writeFile(wb, `${filename}.xlsx`, { bookType: 'xlsx' });
+        message.success('导出成功');
+    });
+    return {
+        onImport: d1 as Handler,
+        onExport: d2 as Handler
+    };
+};

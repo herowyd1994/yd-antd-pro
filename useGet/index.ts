@@ -13,7 +13,7 @@ export default <D = any, P extends Record<string, any> = {}>(
     {
         immediate = true,
         defaultValue,
-        interval = 5000,
+        interval = 0,
         delay,
         deps = [],
         reset: r = false,

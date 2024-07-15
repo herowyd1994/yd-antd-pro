@@ -7,6 +7,7 @@ import { FormLayout } from 'antd/es/form/Form';
 export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
     layout?: FormLayout;
     span?: number | string;
+    delay?: number;
     submitUrl?: string;
     requestProps?: {
         url: string;

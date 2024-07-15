@@ -14,6 +14,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         immediate = true,
         defaultValue,
         interval = 0,
+        delay,
         deps = [],
         reset: r = false,
         formatParams = params => params,
@@ -50,7 +51,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         const { url, params, config } = Reflect.get(cache, key);
         const data = await get(url, await formatParams(params), config);
         return defaultValue && typeof defaultValue === 'object' ? Object.assign(defaultValue!, data) : data;
-    });
+    }, delay);
     useUpdate(d1, deps, Number(!immediate));
     return {
         cache,

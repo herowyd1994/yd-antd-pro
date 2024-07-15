@@ -11,6 +11,7 @@ import { message } from 'antd';
 export default <P extends Record<string, any>>({
     layout = 'horizontal',
     span = 3,
+    delay,
     submitUrl,
     updateUrl,
     requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' },
@@ -31,7 +32,7 @@ export default <P extends Record<string, any>>({
         done?.(res);
         message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
-    });
+    }, delay);
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {
         status && (await dispatch({ status }));
         return onFinish({ ...(await formRef.current?.validateFields()), ...params });

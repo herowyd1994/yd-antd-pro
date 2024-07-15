@@ -7,7 +7,6 @@ export interface Config<D = any, P = {}> extends Partial<RequestConfig> {
     immediate?: boolean;
     defaultValue?: any;
     interval?: number;
-    delay?: number;
     deps?: DependencyList;
     reset?: boolean;
     formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;

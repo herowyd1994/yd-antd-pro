@@ -11,7 +11,7 @@ export default <D extends Record<string, any>>({ title, width, done, ...props }:
     const onShow = async () => {
         dispatch({ visible: true });
         await sleep(150);
-        tableProps.actionRef.current?.reloadAndRest?.();
+        tableProps.actionRef.current?.reload();
     };
     const onClose = () => dispatch({ visible: false });
     const onConfirm = async () => {

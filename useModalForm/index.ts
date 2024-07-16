@@ -19,7 +19,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
     const onVisibleChange = (visible: boolean) => dispatch({ visible });
     const onFinish = async (params: P) => {
         await finish(params);
-        await actionRef.current?.reloadAndRest?.();
+        await actionRef.current?.reload();
         onVisibleChange(false);
     };
     const onShow = async (

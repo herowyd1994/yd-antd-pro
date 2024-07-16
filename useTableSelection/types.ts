@@ -15,4 +15,6 @@ export interface Store {
             records: Record<string, any>[];
         }
     >;
+    rowKeys: (string | number)[];
+    rowRecords: Record<string, any>[];
 }

@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useLock, useStore } from '@yd/r-hooks';
 import { useFetch, useGet } from '../index';
 import { isNone } from '@yd/utils';
-import { ProFormInstance } from '@ant-design/pro-components';
+import { ActionType, ProFormInstance } from '@ant-design/pro-components';
 import { message } from 'antd';
 
 export default <P extends Record<string, any>>({
@@ -24,11 +24,13 @@ export default <P extends Record<string, any>>({
         ctx: {}
     });
     const formRef = useRef<ProFormInstance>();
+    const actionRef = useRef<ActionType>();
     const { done: onFinish } = useLock(async (params: P) => {
         const res = await fetch[status === 'ADD' ? 'post' : 'put'](
             status === 'ADD' ? submitUrl! : updateUrl!,
             await formatParams({ ...params, ...ctx })
         );
+        await actionRef.current?.reload();
         done?.(res);
         message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
@@ -58,6 +60,7 @@ export default <P extends Record<string, any>>({
             labelCol: { span }
         },
         status,
+        actionRef,
         onSave,
         onFieldsValue
     };

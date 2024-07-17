@@ -1,6 +1,6 @@
 /** @format */
 
-import { Props, Store } from './types';
+import { Keys, Props, Store } from './types';
 import { useStore, useUpdate } from '@yd/r-hooks';
 import { useRef } from 'react';
 import { ActionType } from '@ant-design/pro-table';
@@ -12,7 +12,7 @@ export default ({
     defaultRecords = [],
     onDisable = () => false
 }: Props = {}) => {
-    const { cache, rowKeys, rowRecords, dispatch } = useStore<Store>({
+    const { cache, rowKeys, rowRecords, dispatch, reset } = useStore<Store>({
         cache: { 1: { keys: defaultKeys, records: defaultRecords } },
         rowKeys: [],
         rowRecords: []
@@ -23,11 +23,14 @@ export default ({
         dispatch({ cache: { ...cache } });
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });
-    const onRemove = (keys: string | number | (string | number)[]) => {
+    const onRemove = (keys: string | number | Keys | '*') => {
+        if (keys === '*') {
+            return reset();
+        }
         keys = !Array.isArray(keys) ? [keys] : keys;
-        dispatch({
-            rowKeys: rowKeys.filter(key => !(keys as (string | number)[]).includes(key)),
-            rowRecords: rowRecords.filter(record => !(keys as (string | number)[]).includes(record[rowKey]))
+        return dispatch({
+            rowKeys: rowKeys.filter(key => !(keys as Keys).includes(key)),
+            rowRecords: rowRecords.filter(record => !(keys as Keys).includes(record[rowKey]))
         });
     };
     useUpdate(() => {

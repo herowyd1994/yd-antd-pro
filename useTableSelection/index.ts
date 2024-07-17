@@ -23,15 +23,21 @@ export default ({
         dispatch({ cache: { ...cache } });
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });
-    const onRemove = (keys: string | number | Keys | '*') => {
+    const setCheckboxValues = (keys: Keys, records: Record<string, any>[]) => {
+        cache[1] = { keys, records };
+        dispatch({ cache: { ...cache } });
+    };
+    const delCheckboxKeys = (keys: string | number | Keys | '*') => {
         if (keys === '*') {
-            return reset();
+            reset('cache');
+            return;
         }
         keys = !Array.isArray(keys) ? [keys] : keys;
-        return dispatch({
-            rowKeys: rowKeys.filter(key => !(keys as Keys).includes(key)),
-            rowRecords: rowRecords.filter(record => !(keys as Keys).includes(record[rowKey]))
+        Object.values(cache).forEach(value => {
+            value.keys = value.keys.filter(item => !(keys as Keys).includes(item));
+            value.records = value.records.filter(item => !(keys as Keys).includes(item[rowKey]));
         });
+        dispatch({ cache: { ...cache } });
     };
     useUpdate(() => {
         const { rowKeys, rowRecords } = Object.values(cache).reduce<Record<string, any[]>>(
@@ -56,6 +62,7 @@ export default ({
         rowKeys,
         rowRecords,
         actionRef,
-        onRemove
+        setCheckboxValues,
+        delCheckboxKeys
     };
 };

@@ -9,7 +9,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
     const {
         formProps: { formRef, onFinish: finish, ...p },
         status,
-        onFieldsValue,
+        setFieldsValue,
         ...form
     } = useForm(props);
     const { visible, dispatch } = useStore<Store>({ visible: false });
@@ -24,7 +24,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
         status: FormStore['status'] = 'ADD'
     ) => {
         onVisibleChange(true);
-        onFieldsValue(params, ctx, status);
+        setFieldsValue(params, ctx, status);
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {

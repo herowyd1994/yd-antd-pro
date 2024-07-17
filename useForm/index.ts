@@ -39,7 +39,7 @@ export default <P extends Record<string, any>>({
         status && (await dispatch({ status }));
         return onFinish({ ...(await formRef.current?.validateFields()), ...params });
     };
-    const onFieldsValue = async (
+    const setFieldsValue = async (
         params: Record<string, any> = {},
         ctx: Store['ctx'] = {},
         status: Store['status'] = 'EDIT'
@@ -49,7 +49,7 @@ export default <P extends Record<string, any>>({
     };
     useGet(url, params, {
         immediate: !isNone(params),
-        done: async data => onFieldsValue(await formatData(data), params, s),
+        done: async data => setFieldsValue(await formatData(data), params, s),
         ...props
     });
     return {
@@ -62,6 +62,6 @@ export default <P extends Record<string, any>>({
         status,
         actionRef,
         onSave,
-        onFieldsValue
+        setFieldsValue
     };
 };

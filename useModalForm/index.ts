@@ -28,6 +28,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
+        ...form,
         modalFormProps: {
             ...p,
             formRef,
@@ -37,7 +38,6 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
             onFinish
         },
         status,
-        onShow,
-        ...form
+        onShow
     };
 };

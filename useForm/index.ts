@@ -47,7 +47,7 @@ export default <P extends Record<string, any>>({
         await dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
-    useGet(url, params, {
+    const request = useGet(url, params, {
         immediate: !isNone(params),
         done: async data => setFieldsValue(await formatData(data), params, s),
         ...props
@@ -62,6 +62,7 @@ export default <P extends Record<string, any>>({
         status,
         actionRef,
         onSave,
-        setFieldsValue
+        setFieldsValue,
+        ...request
     };
 };

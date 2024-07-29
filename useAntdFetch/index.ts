@@ -1,14 +1,15 @@
 /** @format */
 
 import { createFetch as create } from '@yd/fetch';
-import { throttle } from '@yd/utils';
+import { sleep, throttle } from '@yd/utils';
 import { Config } from './types';
 import { message } from 'antd';
 
 export { useFetch } from '@yd/fetch';
 export const createFetch = ({
     mode = 'hash',
-    onLogout = () => {
+    onLogout = async () => {
+        await sleep(100);
         localStorage.removeItem('Authorization');
         if (mode === 'hash') {
             return (location.hash = '#/login');

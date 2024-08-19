@@ -41,7 +41,7 @@ export default <D = any, P extends Record<string, any> = {}>(
             Reflect.set(cache[key], 'time', now);
         }
         dispatch({ data, key });
-        done?.(data);
+        await done?.(data);
         return data;
     }, 0);
     const { done: d2 } = useLock(async key => {

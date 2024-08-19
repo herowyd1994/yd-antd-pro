@@ -31,7 +31,7 @@ export default <P extends Record<string, any>>({
             await formatParams({ ...params, ...ctx })
         );
         await actionRef.current?.reload();
-        done?.(res);
+        await done?.(res);
         message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
     }, delay);

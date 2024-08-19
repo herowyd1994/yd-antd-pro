@@ -16,7 +16,7 @@ export interface Props<P> extends Pick<TableProps, 'updateUrl'> {
         formatData?<D>(data: any): D;
     } & Config;
     formatParams?(params: Params<P>): Promise<Params<P>> | Params<P>;
-    done?(data: any): void;
+    done?(data: any): Promise<void> | void;
 }
 type Params<P> = Record<string, any> & P;
 export interface Store {

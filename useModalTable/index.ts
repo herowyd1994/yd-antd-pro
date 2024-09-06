@@ -5,7 +5,7 @@ import { useStore } from '@yd/r-hooks';
 import { Props, Store } from './types';
 import { sleep } from '@yd/utils';
 
-export default <D extends Record<string, any>>({ title, width, done, ...props }: Props) => {
+export default <D extends Record<string, any>>({ title, width, done, ...props }: Props<D>) => {
     const { tableProps, data, params, total, ...table } = useTable<D>(props);
     const { visible, dispatch } = useStore<Store>({ visible: false });
     const onShow = async () => {

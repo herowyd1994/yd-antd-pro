@@ -8,6 +8,7 @@ export interface Props {
     params?: Record<string, any>;
     requestUrl?: string;
     submitUrl?: string;
-    formatParams?(params: Record<string, any>): Promise<Record<string, any>> | Record<string, any>;
+    formatRequestParams?(params: Record<string, any>): Promise<Record<string, any>> | Record<string, any>;
+    formatSubmitParams?(params: Record<string, any>): Promise<Record<string, any>> | Record<string, any>;
 }
 export type Handler = (params?: Record<string, any>) => Promise<void>;

@@ -2,7 +2,7 @@
 
 import { Props as FormProps, Store as FormStore } from '../useForm/types';
 
-export interface Props<P> extends FormProps<P> {
+export interface Props<D> extends FormProps<D> {
     title?: string | ((tip: string, status: FormStore['status']) => string);
 }
 export interface Store {

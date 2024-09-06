@@ -13,7 +13,8 @@ export default ({
     params,
     requestUrl,
     submitUrl,
-    formatParams = params => params
+    formatRequestParams = params => params,
+    formatSubmitParams = formatRequestParams
 }: Props) => {
     columns = columns.filter(({ hideInTable, valueType }) => !hideInTable && valueType !== 'option');
     const { get, post } = useFetch();
@@ -22,7 +23,7 @@ export default ({
         const { Sheets, SheetNames } = read(await file.arrayBuffer());
         await post(
             submitUrl!,
-            await formatParams({
+            await formatSubmitParams({
                 ...utils.sheet_to_json<Record<string, any>[]>(Sheets[SheetNames[0]]).map(item =>
                     columns.reduce((obj, { title, dataIndex, valueEnum }) => {
                         let value = item[title as string];
@@ -40,7 +41,7 @@ export default ({
         message.success('导入成功');
     });
     const { done: d2 } = useLock<void>(async p => {
-        const { list } = await get(requestUrl, await formatParams({ ...params, ...p }));
+        const { list } = await get(requestUrl, await formatRequestParams({ ...params, ...p }));
         const wb = utils.book_new();
         utils.book_append_sheet(
             wb,

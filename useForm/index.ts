@@ -8,7 +8,7 @@ import { isNone } from '@yd/utils';
 import { ActionType, ProFormInstance } from '@ant-design/pro-components';
 import { message } from 'antd';
 
-export default <P extends Record<string, any>>({
+export default <D>({
     layout = 'horizontal',
     span = 3,
     delay,
@@ -17,7 +17,7 @@ export default <P extends Record<string, any>>({
     requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' },
     formatParams = params => params,
     done
-}: Props<P>) => {
+}: Props<D>) => {
     const fetch = useFetch();
     const { status, ctx, dispatch } = useStore<Store>({
         status: 'ADD',
@@ -25,7 +25,7 @@ export default <P extends Record<string, any>>({
     });
     const formRef = useRef<ProFormInstance>();
     const actionRef = useRef<ActionType>();
-    const { done: onFinish } = useLock(async (params: P) => {
+    const { done: onFinish } = useLock(async (params: Record<string, any>) => {
         const res = await fetch[status === 'ADD' ? 'post' : 'put'](
             status === 'ADD' ? submitUrl! : updateUrl!,
             await formatParams({ ...params, ...ctx })

@@ -5,7 +5,7 @@ import { useStore, useUpdate } from '@yd/r-hooks';
 import { useForm } from '../index';
 import { Store as FormStore } from '../useForm/types';
 
-export default <P extends Record<string, any>>({ title = tip => tip, ...props }: Props<P>) => {
+export default <D>({ title = tip => tip, ...props }: Props<D>) => {
     const {
         formProps: { formRef, onFinish: finish, ...p },
         status,
@@ -14,7 +14,7 @@ export default <P extends Record<string, any>>({ title = tip => tip, ...props }:
     } = useForm(props);
     const { visible, dispatch } = useStore<Store>({ visible: false });
     const onVisibleChange = (visible: boolean) => dispatch({ visible });
-    const onFinish = async (params: P) => {
+    const onFinish = async (params: Record<string, any>) => {
         await finish(params);
         onVisibleChange(false);
     };

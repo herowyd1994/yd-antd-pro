@@ -5,11 +5,11 @@ import { useStore, useLock, useUpdate } from '@yd/r-hooks';
 import { transformUrlParams } from '@yd/utils';
 import { Config, Store, Cache, Request, GetData } from './types';
 
-const cache: Record<string, Cache> = {};
+const cache: Record<string, Cache<any>> = {};
 
-export default <D = any, P extends Record<string, any> = {}>(
+export default <D>(
     url: string,
-    params?: P,
+    params?: Record<symbol, any>,
     {
         immediate = true,
         defaultValue,
@@ -21,7 +21,7 @@ export default <D = any, P extends Record<string, any> = {}>(
         formatData = data => data,
         done,
         ...config
-    }: Config<D, P> = {}
+    }: Config<D> = {}
 ) => {
     const { get } = useFetch();
     const { data, key, dispatch, reset } = useStore<Store<D>>({

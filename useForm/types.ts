@@ -4,7 +4,7 @@ import { Props as TableProps } from '../useTable/types';
 import { Config } from '../useGet/types';
 import { FormLayout } from 'antd/es/form/Form';
 
-export interface Props<D1> extends Pick<TableProps<any>, 'updateUrl'> {
+export interface Props<D> extends Pick<TableProps<any>, 'updateUrl'> {
     layout?: FormLayout;
     span?: number | string;
     delay?: number;
@@ -13,10 +13,10 @@ export interface Props<D1> extends Pick<TableProps<any>, 'updateUrl'> {
         url: string;
         params?: Record<string, any>;
         status?: Store['status'];
-        formatData?<D2>(data: any): D2;
+        formatData?(data: any): any;
     } & Config<any>;
     formatParams?(params: Record<string, any>): Promise<Record<string, any>> | Record<string, any>;
-    done?(data: D1): any;
+    done?(data: D): any;
 }
 export interface Store {
     status: 'ADD' | 'EDIT';

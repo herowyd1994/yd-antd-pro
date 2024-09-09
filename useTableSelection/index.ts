@@ -22,7 +22,7 @@ export default ({
                     rowKeys: obj.rowKeys.concat(keys),
                     rowRecords: obj.rowRecords.concat(records)
                 }),
-                { rowKeys: [], rowRecords: [] }
+                { rowKeys: [], rowRecords: [] } as Record<string, any[]>
             ),
         [cache]
     );

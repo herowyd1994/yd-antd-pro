@@ -16,7 +16,9 @@ export default ({
     formatRequestParams = params => params,
     formatSubmitParams = formatRequestParams
 }: Props) => {
-    columns = columns.filter(({ hideInTable, valueType }) => !hideInTable && valueType !== 'option');
+    columns = columns.filter(
+        ({ hideInTable, valueType }) => !hideInTable && valueType !== 'option'
+    );
     const { get, post } = useFetch();
     const { done: d1 } = useLock<void>(async p => {
         const { 0: file } = await selectFile('single', '.xlsx,.xls');

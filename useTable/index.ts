@@ -34,7 +34,11 @@ export default <D extends Record<string, any>>({
             .catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
         dispatch({ params, data, total });
-        return { data, success: true, total };
+        return {
+            data,
+            success: true,
+            total
+        };
     };
     const onRemove = async (
         params: Record<string, any>,

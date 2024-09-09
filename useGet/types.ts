@@ -20,10 +20,10 @@ export interface Store<D> {
     data: D | undefined;
     key: string;
 }
-export interface Cache<D> {
+export interface Cache {
     url: string;
     params: Record<string, any>;
     config: Config<any>;
-    data: D;
+    data: any;
     time: number;
 }

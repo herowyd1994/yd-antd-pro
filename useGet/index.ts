@@ -1,7 +1,7 @@
 /** @format */
 
 import { useFetch } from '../index';
-import { useStore, useLock, useMount } from '@yd/r-hooks';
+import { useStore, useLock, useUpdate } from '@yd/r-hooks';
 import { transformUrlParams } from '@yd/utils';
 import { Config, Store, Cache, Request, GetData } from './types';
 
@@ -55,7 +55,7 @@ export default <D>(
                 Object.assign(defaultValue, data)
             :   data;
     }, delay);
-    useMount(() => immediate && d1());
+    useUpdate(d1, deps, Number(!immediate));
     return {
         cache,
         data,

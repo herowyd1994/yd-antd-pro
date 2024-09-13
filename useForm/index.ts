@@ -12,6 +12,7 @@ export default <D>({
     layout = 'horizontal',
     span = 3,
     delay,
+    toast = true,
     submitUrl,
     updateUrl,
     requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' },
@@ -32,7 +33,7 @@ export default <D>({
         );
         await actionRef.current?.reload();
         await done?.(res);
-        message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
+        toast && message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
     }, delay);
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {

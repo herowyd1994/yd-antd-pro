@@ -8,6 +8,7 @@ export interface Props<D> extends Pick<TableProps<any>, 'updateUrl'> {
     layout?: FormLayout;
     span?: number | string;
     delay?: number;
+    toast?: boolean;
     submitUrl?: string;
     requestProps?: {
         url: string;

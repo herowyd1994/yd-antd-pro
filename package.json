@@ -1,10 +1,11 @@
 {
     "name": "@yd/antd-pro",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "## antd-pro工具库",
-    "main": "index.ts",
+    "main": "dist/index.js",
+    "types": "types/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
@@ -18,10 +19,12 @@
         "@yd/utils": "https://github.com/herowyd1994/yd-utils.git"
     },
     "devDependencies": {
-        "@ant-design/pro-components": "^2.6.52",
-        "@types/react": "^18.2.67",
+        "@ant-design/pro-components": "^2.8.1",
+        "@types/node": "^22.8.6",
+        "@types/react": "^18.3.12",
         "antd": "^5.15.3",
-        "prettier": "^3.2.5",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.3",
         "xlsx": "^0.18.5"
     }
 }

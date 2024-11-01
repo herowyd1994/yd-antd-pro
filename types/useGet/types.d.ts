@@ -1,8 +1,5 @@
-/** @format */
-
-import { RequestConfig } from '@yd/fetch/types';
+import { RequestConfig } from '@yd/fetch/types/types';
 import { DependencyList } from 'react';
-
 export interface Config<D> extends Partial<RequestConfig> {
     immediate?: boolean;
     defaultValue?: any;

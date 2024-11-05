@@ -2,7 +2,7 @@ import { useFetch } from '../index';
 import { useStore, useLock, useUpdate } from '@yd/r-hooks';
 import { transformUrlParams } from '@yd/utils';
 const cache = {};
-export default (url, params, { immediate = true, defaultValue, interval = 0, delay, deps = [], reset: r = false, formatParams = params => params, formatData = data => data, done, ...config } = {}) => {
+export default (url, params, { immediate = true, defaultValue, interval = 250, delay, deps = [], reset: r = false, formatParams = params => params, formatData = data => data, done, ...config } = {}) => {
     const { get } = useFetch();
     const { data, key, dispatch, reset } = useStore({
         data: void 0,

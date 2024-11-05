@@ -19,17 +19,17 @@ export default <D extends Record<string, any>>({ title, width, done, ...props }:
         dispatch({ visible: false });
     };
     return {
-        ...table,
+        tableProps: {
+            ...tableProps,
+            manualRequest: true
+        },
         modalProps: {
             title,
             width,
             visible,
             onClose
         },
-        tableProps: {
-            ...tableProps,
-            manualRequest: true
-        },
+        ...table,
         onShow,
         onConfirm
     };

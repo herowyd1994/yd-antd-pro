@@ -13,7 +13,7 @@ export default <D>(
     {
         immediate = true,
         defaultValue,
-        interval = 0,
+        interval = 250,
         delay,
         deps = [],
         reset: r = false,

@@ -28,16 +28,19 @@ export default <D>({ title = tip => tip, ...props }: Props<D>) => {
     };
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
-        ...form,
         modalFormProps: {
             ...p,
             formRef,
             visible,
-            title: typeof title === 'function' ? title(status === 'ADD' ? '新增' : '编辑', status) : title,
+            title:
+                typeof title === 'function' ?
+                    title(status === 'ADD' ? '新增' : '编辑', status)
+                :   title,
             onVisibleChange,
             onFinish
         },
         status,
+        ...form,
         onShow
     };
 };

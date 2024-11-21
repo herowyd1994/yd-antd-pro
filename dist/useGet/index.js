@@ -15,7 +15,8 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
         const now = Date.now();
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
-        let { data, time } = Reflect.get(cache, key);
+        let { params: oParams, data, time } = Reflect.get(cache, key);
+        !isEqual(params, oParams) && Reflect.set(cache[key], 'params', params);
         if (now - time > interval) {
             data = await formatData(await d2(key));
             Reflect.set(cache[key], 'data', data);
@@ -35,6 +36,7 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
             Object.assign(defaultValue, data)
             : data;
     }, delay);
+    const isEqual = (t1, t2) => JSON.stringify(t1) === JSON.stringify(t2);
     useUpdate(d1, deps, Number(!immediate));
     return {
         cache,

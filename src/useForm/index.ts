@@ -15,7 +15,7 @@ export default <D>({
     toast = true,
     submitUrl,
     updateUrl,
-    requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' },
+    requestProps: { url, params, status: s, ...props } = { url: '' },
     formatParams = params => params,
     done
 }: Props<D>) => {
@@ -50,7 +50,7 @@ export default <D>({
     };
     const request = useGet(url, params, {
         immediate: !isNone(params),
-        done: async data => setFieldsValue(await formatData(data), params, s),
+        done: async data => setFieldsValue(data, params, s),
         ...props
     });
     return {

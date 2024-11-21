@@ -3,7 +3,7 @@ import { useLock, useStore } from '@yd/r-hooks';
 import { useFetch, useGet } from '../index';
 import { isNone } from '@yd/utils';
 import { message } from 'antd';
-export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, requestProps: { url, params, status: s, formatData = data => data, ...props } = { url: '' }, formatParams = params => params, done }) => {
+export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, requestProps: { url, params, status: s, ...props } = { url: '' }, formatParams = params => params, done }) => {
     const fetch = useFetch();
     const { status, ctx, dispatch } = useStore({
         status: 'ADD',
@@ -28,7 +28,7 @@ export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUr
     };
     const request = useGet(url, params, {
         immediate: !isNone(params),
-        done: async (data) => setFieldsValue(await formatData(data), params, s),
+        done: async (data) => setFieldsValue(data, params, s),
         ...props
     });
     return {

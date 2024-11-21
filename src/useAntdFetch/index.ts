@@ -9,7 +9,7 @@ export { useFetch } from '@yd/fetch';
 export const createFetch = ({
     mode = 'hash',
     onLogout = async () => {
-        await sleep(100);
+        await sleep(150);
         localStorage.removeItem('Authorization');
         if (mode === 'hash') {
             return (location.hash = '#/login');

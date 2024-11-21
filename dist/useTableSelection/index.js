@@ -19,7 +19,7 @@ export default ({ rowKey = 'id', type = 'checkbox', defaultKeys = [], defaultRec
         if (keys === '*') {
             return reset('cache');
         }
-        keys = !Array.isArray(keys) ? [keys] : keys;
+        keys = (!Array.isArray(keys) ? [keys] : keys);
         Object.values(cache).forEach(value => {
             value.keys = value.keys.filter(item => !keys.includes(item));
             value.records = value.records.filter(item => !keys.includes(item[rowKey]));

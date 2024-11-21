@@ -1,12 +1,12 @@
 import { Props, Store } from './types';
 import { ActionType, ProFormInstance } from '@ant-design/pro-components';
-declare const _default: <D>({ layout, span, delay, toast, submitUrl, updateUrl, requestProps: { url, params, status: s, formatData, ...props }, formatParams, done }: Props<D>) => {
+declare const _default: <D>({ layout, span, delay, toast, submitUrl, updateUrl, requestProps: { url, params, status: s, ...props }, formatParams, done }: Props<D>) => {
     cache: Record<string, import("../useGet/types").Cache>;
-    data: unknown;
+    data: any;
     key: string;
-    dispatch: (action: import("@yd/r-hooks/types/useStore/types").Action<import("../useGet/types").Store<unknown>>) => Promise<import("../useGet/types").Store<unknown>>;
-    reset: (keys?: "*" | keyof import("../useGet/types").Store<D_1> | (keyof import("../useGet/types").Store<D_1>)[]) => Promise<import("../useGet/types").Store<unknown>>;
-    onRequest: import("../useGet/types").Request<unknown>;
+    dispatch: (action: import("@yd/r-hooks/types/useStore/types").Action<import("../useGet/types").Store<any>>) => Promise<import("../useGet/types").Store<any>>;
+    reset: (keys?: "*" | keyof import("../useGet/types").Store<D_1> | (keyof import("../useGet/types").Store<D_1>)[]) => Promise<import("../useGet/types").Store<any>>;
+    onRequest: import("../useGet/types").Request<any>;
     getData: import("../useGet/types").GetData;
     formProps: {
         formRef: import("react").MutableRefObject<ProFormInstance>;

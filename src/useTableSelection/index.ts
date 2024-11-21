@@ -38,10 +38,10 @@ export default ({
         if (keys === '*') {
             return reset('cache');
         }
-        keys = !Array.isArray(keys) ? [keys] : keys;
+        keys = (!Array.isArray(keys) ? [keys] : keys) as Keys;
         Object.values(cache).forEach(value => {
-            value.keys = value.keys.filter(item => !(keys as Keys).includes(item));
-            value.records = value.records.filter(item => !(keys as Keys).includes(item[rowKey]));
+            value.keys = value.keys.filter(item => !keys.includes(item));
+            value.records = value.records.filter(item => !keys.includes(item[rowKey]));
         });
         return dispatch({ cache: { ...cache } });
     };

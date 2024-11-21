@@ -16,8 +16,8 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
         let { config: c, data, time } = Reflect.get(cache, key);
-        !isEqual(c, config) && Reflect.set(cache[key], 'config', config);
         if (now - time > interval) {
+            !isEqual(c, config) && Reflect.set(cache[key], 'config', config);
             data = await formatData(await d2(key));
             Reflect.set(cache[key], 'data', data);
             Reflect.set(cache[key], 'time', now);

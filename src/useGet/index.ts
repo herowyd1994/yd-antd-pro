@@ -35,8 +35,8 @@ export default <D>(
         const now = Date.now();
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
-        let { params: oParams, data, time } = Reflect.get(cache, key);
-        !isEqual(params, oParams) && Reflect.set(cache[key], 'params', params);
+        let { config: c, data, time } = Reflect.get(cache, key);
+        !isEqual(c, config) && Reflect.set(cache[key], 'config', config);
         if (now - time > interval) {
             data = await formatData(await d2(key));
             Reflect.set(cache[key], 'data', data);

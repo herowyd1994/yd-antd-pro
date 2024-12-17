@@ -12,8 +12,7 @@ export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl,
     });
     const actionRef = useRef();
     const request = async (params) => {
-        params = await formatParams(params);
-        params = { ...params, pageNum: params.current };
+        params = await formatParams({ ...params, pageNum: params.current });
         let { list: data, total } = await get(requestUrl, params)
             .then(list => (Array.isArray(list) ? { list, total: list.length } : list))
             .catch(() => ({ list: [], total: 0 }));

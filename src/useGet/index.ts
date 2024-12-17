@@ -17,8 +17,6 @@ export default <D>(
         delay,
         deps = [],
         reset: r = false,
-        formatParams = params => params,
-        formatData = data => data,
         done,
         ...config
     }: Config<D> = {}
@@ -38,7 +36,7 @@ export default <D>(
         let { config: c, data, time } = Reflect.get(cache, key);
         if (now - time > interval) {
             !isEqual(c, config) && Reflect.set(cache[key], 'config', config);
-            data = await formatData(await d2(key));
+            data = await d2(key);
             Reflect.set(cache[key], 'data', data);
             Reflect.set(cache[key], 'time', now);
         }
@@ -51,7 +49,7 @@ export default <D>(
             return;
         }
         const { url, params, config } = Reflect.get(cache, key);
-        const data = await get(url, await formatParams(params), config);
+        const data = await get(url, params, config);
         return defaultValue && typeof defaultValue === 'object' ?
                 Object.assign(defaultValue!, data)
             :   data;

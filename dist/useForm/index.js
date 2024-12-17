@@ -3,7 +3,7 @@ import { useLock, useStore } from '@yd/r-hooks';
 import { useFetch, useGet } from '../index';
 import { isNone } from '@yd/utils';
 import { message } from 'antd';
-export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, requestProps: { url, params, status: s, ...props } = { url: '' }, formatParams = params => params, done }) => {
+export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, request: { url, params, status: s, ...c1 } = { url: '' }, done, ...c2 }) => {
     const fetch = useFetch();
     const { status, ctx, dispatch } = useStore({
         status: 'ADD',
@@ -12,9 +12,9 @@ export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUr
     const formRef = useRef();
     const actionRef = useRef();
     const { done: onFinish } = useLock(async (params) => {
-        const res = await fetch[status === 'ADD' ? 'post' : 'put'](status === 'ADD' ? submitUrl : updateUrl, await formatParams({ ...params, ...ctx }));
-        await actionRef.current?.reload();
+        const res = await fetch[status === 'ADD' ? 'post' : 'put'](status === 'ADD' ? submitUrl : updateUrl, { ...params, ...ctx }, c2);
         await done?.(res);
+        await actionRef.current?.reload();
         toast && message.success(`${status === 'ADD' ? '提交' : '更新'}成功`);
         return res;
     }, delay);
@@ -27,9 +27,9 @@ export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUr
         formRef.current?.setFieldsValue(params);
     };
     const request = useGet(url, params, {
+        ...c1,
         immediate: !isNone(params),
-        done: async (data) => setFieldsValue(data, params, s),
-        ...props
+        done: async (data) => setFieldsValue(data, params, s)
     });
     return {
         formProps: {

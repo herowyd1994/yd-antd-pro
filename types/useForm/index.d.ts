@@ -1,6 +1,6 @@
 import { Props, Store } from './types';
 import { ActionType, ProFormInstance } from '@ant-design/pro-components';
-declare const _default: <D>({ layout, span, delay, toast, submitUrl, updateUrl, requestProps: { url, params, status: s, ...props }, formatParams, done }: Props<D>) => {
+declare const _default: <D>({ layout, span, delay, toast, submitUrl, updateUrl, request: { url, params, status: s, ...c1 }, done, ...c2 }: Props<D>) => {
     cache: Record<string, import("../useGet/types").Cache>;
     data: any;
     key: string;

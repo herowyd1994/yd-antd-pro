@@ -10,7 +10,7 @@ export default <D extends Record<string, any>>({ title, width, done, ...props }:
     const { visible, dispatch } = useStore<Store>({ visible: false });
     const onShow = async () => {
         dispatch({ visible: true });
-        await sleep(100);
+        await sleep(150);
         tableProps.actionRef.current?.reload();
     };
     const onClose = () => dispatch({ visible: false });

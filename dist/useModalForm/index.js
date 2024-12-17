@@ -1,7 +1,7 @@
 import { useStore, useUpdate } from '@yd/r-hooks';
 import { useForm } from '../index';
-export default ({ title = tip => tip, ...props }) => {
-    const { formProps: { formRef, onFinish: finish, ...p }, status, setFieldsValue, ...form } = useForm(props);
+export default ({ title = tip => tip, ...p1 }) => {
+    const { formProps: { formRef, onFinish: finish, ...p2 }, status, setFieldsValue, ...form } = useForm(p1);
     const { visible, dispatch } = useStore({ visible: false });
     const onVisibleChange = (visible) => dispatch({ visible });
     const onFinish = async (params) => {
@@ -15,7 +15,7 @@ export default ({ title = tip => tip, ...props }) => {
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
         modalFormProps: {
-            ...p,
+            ...p2,
             formRef,
             visible,
             title: typeof title === 'function' ?

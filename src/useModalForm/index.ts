@@ -5,13 +5,13 @@ import { useStore, useUpdate } from '@yd/r-hooks';
 import { useForm } from '../index';
 import { Store as FormStore } from '../useForm/types';
 
-export default <D>({ title = tip => tip, ...props }: Props<D>) => {
+export default <D>({ title = tip => tip, ...p1 }: Props<D>) => {
     const {
-        formProps: { formRef, onFinish: finish, ...p },
+        formProps: { formRef, onFinish: finish, ...p2 },
         status,
         setFieldsValue,
         ...form
-    } = useForm(props);
+    } = useForm(p1);
     const { visible, dispatch } = useStore<Store>({ visible: false });
     const onVisibleChange = (visible: boolean) => dispatch({ visible });
     const onFinish = async (params: Record<string, any>) => {
@@ -29,7 +29,7 @@ export default <D>({ title = tip => tip, ...props }: Props<D>) => {
     useUpdate(() => !visible && formRef.current?.resetFields(), [visible]);
     return {
         modalFormProps: {
-            ...p,
+            ...p2,
             formRef,
             visible,
             title:

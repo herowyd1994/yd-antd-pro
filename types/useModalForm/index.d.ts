@@ -1,6 +1,6 @@
 import { Props, Store } from './types';
 import { Store as FormStore } from '../useForm/types';
-declare const _default: <D>({ title, ...props }: Props<D>) => {
+declare const _default: <D>({ title, ...p1 }: Props<D>) => {
     onShow: (params?: Record<string, any>, ctx?: FormStore["ctx"], status?: FormStore["status"]) => Promise<void>;
     cache: Record<string, import("../useGet/types").Cache>;
     data: any;

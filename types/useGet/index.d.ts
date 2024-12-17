@@ -1,5 +1,5 @@
 import { Config, Store, Cache, Request, GetData } from './types';
-declare const _default: <D>(url: string, params?: Record<string, any>, { immediate, defaultValue, interval, delay, deps, reset: r, formatParams, formatData, done, ...config }?: Config<D>) => {
+declare const _default: <D>(url: string, params?: Record<string, any>, { immediate, defaultValue, interval, delay, deps, reset: r, done, ...config }?: Config<D>) => {
     cache: Record<string, Cache>;
     data: D;
     key: string;

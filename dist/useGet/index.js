@@ -2,7 +2,7 @@ import { useFetch } from '../index';
 import { useStore, useLock, useUpdate } from '@yd/r-hooks';
 import { transformUrlParams } from '@yd/utils';
 const cache = {};
-export default (url, params, { immediate = true, defaultValue, interval = 250, delay, deps = [], reset: r = false, formatParams = params => params, formatData = data => data, done, ...config } = {}) => {
+export default (url, params, { immediate = true, defaultValue, interval = 250, delay, deps = [], reset: r = false, done, ...config } = {}) => {
     const { get } = useFetch();
     const { data, key, dispatch, reset } = useStore({
         data: void 0,
@@ -18,7 +18,7 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
         let { config: c, data, time } = Reflect.get(cache, key);
         if (now - time > interval) {
             !isEqual(c, config) && Reflect.set(cache[key], 'config', config);
-            data = await formatData(await d2(key));
+            data = await d2(key);
             Reflect.set(cache[key], 'data', data);
             Reflect.set(cache[key], 'time', now);
         }
@@ -31,7 +31,7 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
             return;
         }
         const { url, params, config } = Reflect.get(cache, key);
-        const data = await get(url, await formatParams(params), config);
+        const data = await get(url, params, config);
         return defaultValue && typeof defaultValue === 'object' ?
             Object.assign(defaultValue, data)
             : data;

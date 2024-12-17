@@ -12,15 +12,14 @@ export default (url, params, { immediate = true, defaultValue, interval = 250, d
         r && (await reset());
         params = { ...params, ...p };
         const key = `${url}${transformUrlParams(params)}`;
-        const now = Date.now();
         !Reflect.has(cache, key) &&
             Reflect.set(cache, key, { url, params, config, data: void 0, time: 0 });
         let { config: c, data, time } = Reflect.get(cache, key);
-        if (now - time > interval) {
+        if (Date.now() - time > interval) {
             Reflect.set(cache[key], 'config', config);
             data = await d2(key);
             Reflect.set(cache[key], 'data', data);
-            Reflect.set(cache[key], 'time', now);
+            Reflect.set(cache[key], 'time', Date.now());
         }
         dispatch({ data, key });
         await done?.(data);

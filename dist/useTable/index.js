@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useStore, useUpdate } from '@yd/r-hooks';
 import { useFetch, useInteractive } from '../index';
 import { message } from 'antd';
-export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl, removeUrl, updateUrl, refs, formatParams = params => params, formatData = data => data }) => {
+export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl, removeUrl, updateUrl, refs, formatParams = params => params, formatData = data => data, ...props }) => {
     const { get, del, put } = useFetch();
     const { confirm } = useInteractive();
     const { params, data, total, dispatch } = useStore({
@@ -13,9 +13,10 @@ export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl,
     const actionRef = useRef();
     const request = async (params) => {
         params = await formatParams({ ...params, pageNum: params.current });
-        let { list: data, total } = await get(requestUrl, params)
-            .then(list => (Array.isArray(list) ? { list, total: list.length } : list))
-            .catch(() => ({ list: [], total: 0 }));
+        let { list: data, total } = await get(requestUrl, params, {
+            ...props,
+            formatData: list => (Array.isArray(list) ? { list, total: list.length } : list)
+        }).catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
         dispatch({ params, data, total });
         return {

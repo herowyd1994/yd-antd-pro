@@ -1,7 +1,7 @@
 /** @format */
 
 import { Props as TableProps } from '../useTable/types';
-import { Config } from '../useGet/types';
+import { Config } from '../useCache/types';
 import { FormLayout } from 'antd/es/form/Form';
 
 export interface Props<D> extends Pick<TableProps, 'updateUrl'>, Omit<Config, 'immediate'> {
@@ -15,7 +15,6 @@ export interface Props<D> extends Pick<TableProps, 'updateUrl'>, Omit<Config, 'i
         params?: Record<string, any>;
         status?: Store['status'];
     } & Omit<Config, 'immediate' | 'done'>;
-    done?(data: D): any;
 }
 export interface Store {
     status: 'ADD' | 'EDIT';

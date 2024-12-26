@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useLock, useStore } from '@yd/r-hooks';
-import { useFetch, useGet } from '../index';
+import { useFetch, useCache } from '../index';
 import { isNone } from '@yd/utils';
 import { message } from 'antd';
 export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, request: { url, params, status: s, ...c1 } = { url: '' }, done, ...c2 }) => {
@@ -26,7 +26,7 @@ export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUr
         await dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
-    const request = useGet(url, params, {
+    const request = useCache(url, params, {
         ...c1,
         immediate: !isNone(params),
         done: async (data) => setFieldsValue(data, params, s)

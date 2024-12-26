@@ -2,8 +2,9 @@
 
 import { ActionType, ProColumns } from '@ant-design/pro-components';
 import { MutableRefObject } from 'react';
+import { MethodFnConfig } from '@yd/fetch/types/types';
 
-export interface Props<D = any> {
+export interface Props<D = any> extends Omit<MethodFnConfig, 'formatData'> {
     columns: ProColumns[];
     pageSize?: number;
     width?: number;
@@ -11,7 +12,6 @@ export interface Props<D = any> {
     removeUrl?: string;
     updateUrl?: string;
     refs?: MutableRefObject<ActionType>[];
-    formatParams?(params: Record<string, any>): Promise<Record<string, any>> | Record<string, any>;
     formatData?(data: any): Promise<D[]> | D[];
 }
 export interface Store<D> {

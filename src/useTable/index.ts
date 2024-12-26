@@ -16,7 +16,8 @@ export default <D extends Record<string, any>>({
     updateUrl,
     refs,
     formatParams = params => params,
-    formatData = data => data
+    formatData = data => data,
+    ...props
 }: Props<D>) => {
     const { get, del, put } = useFetch();
     const { confirm } = useInteractive();
@@ -28,9 +29,10 @@ export default <D extends Record<string, any>>({
     const actionRef = useRef<ActionType>();
     const request = async (params: Record<string, any>) => {
         params = await formatParams({ ...params, pageNum: params.current });
-        let { list: data, total } = await get(requestUrl!, params)
-            .then(list => (Array.isArray(list) ? { list, total: list.length } : list))
-            .catch(() => ({ list: [], total: 0 }));
+        let { list: data, total } = await get(requestUrl!, params, {
+            ...props,
+            formatData: list => (Array.isArray(list) ? { list, total: list.length } : list)
+        }).catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
         dispatch({ params, data, total });
         return {

@@ -2,7 +2,7 @@ import { ActionType } from '@ant-design/pro-components';
 import { Props } from './types';
 import { ReactNode } from 'react';
 import { ModalFuncProps } from 'antd';
-declare const _default: <D extends Record<string, any>>({ columns, pageSize: defaultPageSize, width: x, requestUrl, removeUrl, updateUrl, refs, formatParams, formatData }: Props<D>) => {
+declare const _default: <D extends Record<string, any>>({ columns, pageSize: defaultPageSize, width: x, requestUrl, removeUrl, updateUrl, refs, formatParams, formatData, ...props }: Props<D>) => {
     tableProps: {
         actionRef: import("react").MutableRefObject<ActionType>;
         columns: import("@ant-design/pro-components").ProColumns[];

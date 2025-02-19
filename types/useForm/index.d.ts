@@ -2,9 +2,9 @@ import { Props, Store } from './types';
 import { ActionType, ProFormInstance } from '@ant-design/pro-components';
 declare const _default: <D>({ layout, span, delay, toast, submitUrl, updateUrl, request: { url, params, status: s, ...c1 }, done, ...c2 }: Props<D>) => {
     data: unknown;
+    isLocking: boolean;
     dispatch: (action: import("@yd/r-hooks/types/useStore/types").Action<import("../useCache/types").Store<unknown>>) => Promise<import("../useCache/types").Store<unknown>>;
     request: import("../useCache/types").Request<unknown>;
-    isLoading: boolean;
     formProps: {
         formRef: import("react").MutableRefObject<ProFormInstance>;
         onFinish: import("@yd/r-hooks/types/useLatest/types").Handler<Promise<Promise<any>>>;

@@ -12,8 +12,8 @@ export default <D>({ title = tip => tip, ...p1 }: Props<D>) => {
         setFieldsValue,
         ...form
     } = useForm(p1);
-    const { visible, dispatch } = useStore<Store>({ visible: false });
-    const onVisibleChange = (visible: boolean) => dispatch({ visible });
+    const { visible, $dispatch } = useStore<Store>({ visible: false });
+    const onVisibleChange = (visible: boolean) => $dispatch({ visible });
     const onFinish = async (params: Record<string, any>) => {
         await finish(params);
         onVisibleChange(false);

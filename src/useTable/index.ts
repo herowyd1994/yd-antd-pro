@@ -21,7 +21,7 @@ export default <D extends Record<string, any>>({
 }: Props<D>) => {
     const { get, del, put } = useFetch();
     const { confirm } = useInteractive();
-    const { params, data, total, dispatch } = useStore<Store<D>>({
+    const { params, data, total, $dispatch } = useStore<Store<D>>({
         params: {},
         data: [],
         total: 0
@@ -34,7 +34,7 @@ export default <D extends Record<string, any>>({
             formatData: list => (Array.isArray(list) ? { list, total: list.length } : list)
         }).catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
-        dispatch({ params, data, total });
+        $dispatch({ params, data, total });
         return {
             data,
             success: true,

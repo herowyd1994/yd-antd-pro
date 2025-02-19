@@ -5,7 +5,7 @@ import { isNone } from '@yd/utils';
 import { message } from 'antd';
 export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUrl, updateUrl, request: { url, params, status: s, ...c1 } = { url: '' }, done, ...c2 }) => {
     const fetch = useFetch();
-    const { status, ctx, dispatch } = useStore({
+    const { status, ctx, $dispatch } = useStore({
         status: 'ADD',
         ctx: {}
     });
@@ -19,11 +19,11 @@ export default ({ layout = 'horizontal', span = 3, delay, toast = true, submitUr
         return res;
     }, delay);
     const onSave = async (params, status) => {
-        status && (await dispatch({ status }));
+        status && (await $dispatch({ status }));
         return onFinish({ ...(await formRef.current?.validateFields()), ...params });
     };
     const setFieldsValue = async (params = {}, ctx = {}, status = 'EDIT') => {
-        await dispatch({ status, ctx });
+        await $dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
     const request = useCache(url, params, {

@@ -5,7 +5,7 @@ import { message } from 'antd';
 export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl, removeUrl, updateUrl, refs, formatParams = params => params, formatData = data => data, ...props }) => {
     const { get, del, put } = useFetch();
     const { confirm } = useInteractive();
-    const { params, data, total, dispatch } = useStore({
+    const { params, data, total, $dispatch } = useStore({
         params: {},
         data: [],
         total: 0
@@ -18,7 +18,7 @@ export default ({ columns, pageSize: defaultPageSize = 10, width: x, requestUrl,
             formatData: list => (Array.isArray(list) ? { list, total: list.length } : list)
         }).catch(() => ({ list: [], total: 0 }));
         data = await formatData(data);
-        dispatch({ params, data, total });
+        $dispatch({ params, data, total });
         return {
             data,
             success: true,

@@ -7,16 +7,16 @@ import { sleep } from '@yd/utils';
 
 export default <D extends Record<string, any>>({ title, width, done, ...props }: Props<D>) => {
     const { tableProps, data, params, total, ...table } = useTable<D>(props);
-    const { visible, dispatch } = useStore<Store>({ visible: false });
+    const { visible, $dispatch } = useStore<Store>({ visible: false });
     const onShow = async () => {
-        dispatch({ visible: true });
+        $dispatch({ visible: true });
         await sleep(150);
         tableProps.actionRef.current?.reload();
     };
-    const onClose = () => dispatch({ visible: false });
+    const onClose = () => $dispatch({ visible: false });
     const onConfirm = async () => {
         await done?.(params, data, total);
-        dispatch({ visible: false });
+        $dispatch({ visible: false });
     };
     return {
         tableProps: {

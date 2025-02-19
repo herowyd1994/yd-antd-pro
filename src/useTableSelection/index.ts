@@ -12,7 +12,7 @@ export default ({
     defaultRecords = [],
     onDisable = () => false
 }: Props = {}) => {
-    const { cache, dispatch, reset } = useStore<Store>({
+    const { cache, $dispatch, $reset } = useStore<Store>({
         cache: { 1: { keys: defaultKeys, records: defaultRecords } }
     });
     const { rowKeys, rowRecords } = useMemo(
@@ -29,21 +29,21 @@ export default ({
     const actionRef = useRef<ActionType>();
     const onChange = (keys: (string | number)[], records: Record<string, any>[]) => {
         cache[type === 'radio' ? 1 : actionRef.current?.pageInfo?.current!] = { keys, records };
-        dispatch({ cache: { ...cache } });
+        $dispatch({ cache: { ...cache } });
     };
     const getCheckboxProps = (record: Record<string, any>) => ({ disabled: onDisable(record) });
     const setCheckboxValues = (keys: Keys, records: Record<string, any>[]) =>
-        dispatch({ cache: { 1: { keys, records } } });
+        $dispatch({ cache: { 1: { keys, records } } });
     const delCheckboxKeys = (keys: string | number | Keys | '*') => {
         if (keys === '*') {
-            return reset('cache');
+            return $reset('cache');
         }
         keys = (!Array.isArray(keys) ? [keys] : keys) as Keys;
         Object.values(cache).forEach(value => {
             value.keys = value.keys.filter(item => !keys.includes(item));
             value.records = value.records.filter(item => !keys.includes(item[rowKey]));
         });
-        return dispatch({ cache: { ...cache } });
+        return $dispatch({ cache: { ...cache } });
     };
     return {
         tableSelectionProps: {

@@ -20,7 +20,7 @@ export default <D>({
     ...c2
 }: Props<D>) => {
     const fetch = useFetch();
-    const { status, ctx, dispatch } = useStore<Store>({
+    const { status, ctx, $dispatch } = useStore<Store>({
         status: 'ADD',
         ctx: {}
     });
@@ -38,7 +38,7 @@ export default <D>({
         return res;
     }, delay);
     const onSave = async (params?: Record<string, any>, status?: Store['status']) => {
-        status && (await dispatch({ status }));
+        status && (await $dispatch({ status }));
         return onFinish({ ...(await formRef.current?.validateFields()), ...params });
     };
     const setFieldsValue = async (
@@ -46,7 +46,7 @@ export default <D>({
         ctx: Store['ctx'] = {},
         status: Store['status'] = 'EDIT'
     ) => {
-        await dispatch({ status, ctx });
+        await $dispatch({ status, ctx });
         formRef.current?.setFieldsValue(params);
     };
     const request = useCache(url, params, {

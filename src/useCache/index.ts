@@ -13,8 +13,8 @@ export default <D>(
     { immediate = true, interval = 1500, delay, deps = [], done: d, ...config }: Config<D> = {}
 ) => {
     const { get } = useFetch();
-    const { data, dispatch } = useStore<Store<D>>({ data: void 0 });
-    const { done, lock: isLoading } = useLock(async p => {
+    const { data, $dispatch: dispatch } = useStore<Store<D>>({ data: void 0 });
+    const { isLocking, done } = useLock(async p => {
         params = { ...params, ...p };
         const key = `${url}${transformUrlParams(params!)}`;
         !Reflect.has(cache, key) &&
@@ -24,15 +24,15 @@ export default <D>(
             data = await get(url, params, config);
             Reflect.set(cache, key, { url, params, config, data, time: Date.now() });
             dispatch({ data });
-            await d?.(data);
+            d?.(data);
         }
         return data;
     }, delay);
     useUpdate(done, deps, Number(!immediate));
     return {
         data,
+        isLocking,
         dispatch,
-        request: done as Request<D>,
-        isLoading
+        request: done as Request<D>
     };
 };

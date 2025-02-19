@@ -24,7 +24,7 @@ export default <D>(
             data = await get(url, params, config);
             Reflect.set(cache, key, { url, params, config, data, time: Date.now() });
             dispatch({ data });
-            d?.(data);
+            await d?.(data);
         }
         return data;
     }, delay);

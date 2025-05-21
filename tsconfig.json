@@ -1,18 +1,22 @@
 {
     "compilerOptions": {
-        "target": "esnext",
+        "target": "ES5",
         "moduleResolution": "node",
         "outDir": "dist",
         "removeComments": true,
         "declaration": true,
-        "declarationDir": "types",
-        "allowSyntheticDefaultImports": true
+        "skipLibCheck": true,
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
+        ]
     },
-    "exclude": [
-        "node_modules",
-        "**/*.d.ts"
-    ],
     "include": [
         "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
     ]
 }

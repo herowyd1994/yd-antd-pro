@@ -419,19 +419,19 @@
 
 "@yd/fetch@https://github.com/herowyd1994/yd-fetch.git":
   version "1.0.1"
-  resolved "https://github.com/herowyd1994/yd-fetch.git#73a61c48050f6e4c2cb53c10d500e6839df76d7b"
+  resolved "https://github.com/herowyd1994/yd-fetch.git#a9420bbb42cfab44e547ecc59540a2047fe1632f"
   dependencies:
     "@yd/utils" "https://github.com/herowyd1994/yd-utils.git"
 
 "@yd/r-hooks@https://github.com/herowyd1994/yd-r-hooks.git":
   version "1.0.1"
-  resolved "https://github.com/herowyd1994/yd-r-hooks.git#cbc6933bc79b56e59036204f308c60dbe876cf16"
+  resolved "https://github.com/herowyd1994/yd-r-hooks.git#9ab61187afbf9b2072fa89f843b8730d0e33570b"
   dependencies:
     "@yd/utils" "https://github.com/herowyd1994/yd-utils.git"
 
 "@yd/utils@https://github.com/herowyd1994/yd-utils.git":
   version "1.0.1"
-  resolved "https://github.com/herowyd1994/yd-utils.git#fcffed7ab31d181273672c67e6a9f6f336e01c8b"
+  resolved "https://github.com/herowyd1994/yd-utils.git#dc705df3745b8ec1b1e420dfd6e4c06c7ab66b6d"
 
 add-dom-event-listener@^1.1.0:
   version "1.1.0"

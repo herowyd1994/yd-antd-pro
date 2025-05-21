@@ -4,7 +4,7 @@ declare const _default: <D>({ title, ...p1 }: Props<D>) => {
     onShow: (params?: Record<string, any>, ctx?: FormStore["ctx"], status?: FormStore["status"]) => Promise<void>;
     data: unknown;
     isLocking: boolean;
-    dispatch: (action: import("@yd/r-hooks/types/useStore/types").Action<import("../useCache/types").Store<unknown>>) => Promise<import("../useCache/types").Store<unknown>>;
+    dispatch: (action: import("@yd/r-hooks/dist/useStore/types").Action<import("../useCache/types").Store<unknown>>) => Promise<import("../useCache/types").Store<unknown>>;
     request: import("../useCache/types").Request<unknown>;
     actionRef: import("react").MutableRefObject<import("@ant-design/pro-table").ActionType>;
     onSave: (params?: Record<string, any>, status?: FormStore["status"]) => Promise<any>;

@@ -2,7 +2,7 @@
 
 import { ActionType, ProColumns } from '@ant-design/pro-components';
 import { MutableRefObject } from 'react';
-import { MethodFnConfig } from '@yd/fetch/types/types';
+import { MethodFnConfig } from '@yd/fetch/dist/types';
 
 export interface Props<D = any> extends Omit<MethodFnConfig, 'formatData'> {
     columns: ProColumns[];

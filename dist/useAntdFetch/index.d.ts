@@ -4,4 +4,4 @@ export declare const createFetch: ({ mode, onLogout, onError, ...config }: Confi
     [x: string]: any;
     method: any;
     url: any;
-}) => any) & import("@yd/fetch/types/lib/request").Request;
+}) => any) & import("@yd/fetch/dist/lib/request").Request;

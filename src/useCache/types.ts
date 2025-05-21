@@ -1,6 +1,6 @@
 /** @format */
 
-import { MethodFnConfig } from '@yd/fetch/types/types';
+import { MethodFnConfig } from '@yd/fetch/dist/types';
 import { DependencyList } from 'react';
 
 export interface Config<D = any> extends MethodFnConfig {
